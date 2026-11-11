@@ -73,3 +73,10 @@ The real `.env` file is excluded by `.gitignore`. Upload `.env.example`, not `.e
 - **Model error:** Set `GROQ_MODEL` in `.env` to a model currently available to your Groq account.
 - **Package error:** Activate the environment with `source venv/bin/activate`, then run `python3 -m pip install -r requirements.txt`.
 - **Page not opening:** Make sure `python3 app.py` is still running, then visit `http://127.0.0.1:5000`.
+## Application Screenshots
+
+### 1. English Message Generation
+![English Message](screenshot1.png)
+
+### 2. Roman Urdu Message Generation
+![Roman Urdu Message](screenshot2.png)
