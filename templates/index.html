@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f0e8">
+  <title>AI Email & Message Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Message Mate home">
+        <span class="brand-mark">m.</span>
+        <span>message mate</span>
+      </a>
+      <span class="powered"><span class="status-dot"></span> Powered by Groq AI</span>
+    </header>
+
+    <main>
+      <section class="hero">
+        <p class="eyebrow">WRITE WITH MORE CONFIDENCE</p>
+        <h1>Say it better.<br><em>Keep it you.</em></h1>
+        <p class="hero-copy">Turn rough thoughts into thoughtful, polished messages — in just a moment.</p>
+        <div class="hero-leaf" aria-hidden="true">✳</div>
+      </section>
+
+      <section class="workspace" aria-label="Message assistant">
+        <div class="form-card">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">YOUR MESSAGE</p>
+              <h2>Let's shape your words</h2>
+            </div>
+            <span class="step-number">01 / 02</span>
+          </div>
+
+          <div class="field-grid">
+            <label class="field">
+              <span>Message type</span>
+              <select id="messageType">
+                {% for item in message_types %}
+                <option value="{{ item }}">{{ item }}</option>
+                {% endfor %}
+              </select>
+            </label>
+            <label class="field">
+              <span>Writing tone</span>
+              <select id="tone">
+                {% for item in tones %}
+                <option value="{{ item }}">{{ item }}</option>
+                {% endfor %}
+              </select>
+            </label>
+          </div>
+
+          <label class="field message-field">
+            <span>Rough message</span>
+            <textarea id="messageInput" maxlength="10000" placeholder="Type or paste your rough message here...&#10;&#10;Don't worry about spelling or perfect sentences. Just write what you want to say."></textarea>
+          </label>
+          <div class="input-meta">
+            <span>Tip: Include the important details you want to keep.</span>
+            <span id="charCount">0 / 10,000</span>
+          </div>
+
+          <div class="form-actions">
+            <button class="button button-primary" id="generateBtn">
+              <span>Generate with AI</span><span aria-hidden="true">↗</span>
+            </button>
+            <button class="button button-quiet" id="clearBtn" type="button">Clear all</button>
+          </div>
+          <p class="error-message" id="errorMessage" role="alert" hidden></p>
+        </div>
+
+        <div class="result-card" id="resultCard">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">THE POLISHED VERSION</p>
+              <h2>Your message</h2>
+            </div>
+            <span class="result-sparkle" aria-hidden="true">✧</span>
+          </div>
+
+          <div class="result-content" id="resultContent">
+            <div class="empty-state" id="emptyState">
+              <div class="empty-icon">✎</div>
+              <h3>Your words, thoughtfully refined.</h3>
+              <p>Your improved message will appear here. Choose a category and tone, then generate when you're ready.</p>
+            </div>
+            <div class="loading-state" id="loadingState" hidden>
+              <span class="loader"></span>
+              <p>Generating your message...</p>
+              <small>Giving your words a little polish</small>
+            </div>
+            <pre id="generatedMessage" hidden></pre>
+          </div>
+
+          <div class="result-actions" id="resultActions" hidden>
+            <button class="button button-primary button-small" id="copyBtn">Copy message</button>
+            <button class="button button-outline button-small" id="downloadBtn">Download .txt</button>
+            <button class="button button-outline button-small" id="regenerateBtn">Regenerate ↻</button>
+          </div>
+          <p class="copy-feedback" id="copyFeedback" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <section class="note-strip">
+        <span class="note-icon">✦</span>
+        <p><strong>A little note:</strong> AI helps with the wording, but your meaning stays at the heart of every message.</p>
+      </section>
+    </main>
+
+    <footer>
+      <span>message mate</span>
+      <span>Made for clearer communication · <span id="year"></span></span>
+    </footer>
+  </div>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
